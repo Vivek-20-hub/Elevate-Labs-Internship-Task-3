@@ -1,4 +1,4 @@
-![p6](https://github.com/user-attachments/assets/8a1f46c0-93ad-47d5-bd60-ff7f619efe1e)
+
 # Elevate-Labs-Internship-Task-3
 
 **Dataset:** `cleaned_people_data.csv`  
@@ -111,8 +111,12 @@ FROM cleaned_people_data a
 JOIN cleaned_people_data b ON a.job_title = b.job_title
 WHERE a.user_id <> b.user_id;
 ```
-![p6](https://github.com/user-attachments/assets/2a4023d2-f317-4320-b1b7-863403a0d7cb)
+
+
+![Uploading p6.JPG…]()
+
 ---
+
 
 ###  Left Join: Same Gender Users
 
