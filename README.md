@@ -111,9 +111,8 @@ FROM cleaned_people_data a
 JOIN cleaned_people_data b ON a.job_title = b.job_title
 WHERE a.user_id <> b.user_id;
 ```
+![p6](https://github.com/user-attachments/assets/1f97927c-7cf0-45ec-8003-8dd06ab47e73)
 
-
-![Uploading p6.JPG…]()
 
 ---
 
