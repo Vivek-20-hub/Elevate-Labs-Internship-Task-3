@@ -20,7 +20,9 @@ Index of Job_title:
 CREATE INDEX JobTitle_index ON cleaned_people_data(job_title);
 
 Created Views:
+
 view Average Birth Year,Gender,Jobtitles
+
 CREATE VIEW AvgBirthYear AS
 SELECT AVG(CAST(strftime('%Y', date_of_birth) AS INTEGER)) AS avg_birth_year FROM cleaned_people_data;
 
@@ -37,6 +39,7 @@ SELECT job_title, COUNT(*) AS count FROM cleaned_people_data GROUP BY job_title 
 ![p3](https://github.com/user-attachments/assets/4ea846c3-5b04-494f-a117-d7b9d7993809)
 
 Output views
+
 SELECT * FROM AvgBirthYear;
 SELECT * FROM CountByGender;
 SELECT * FROM JobTitleStats;
