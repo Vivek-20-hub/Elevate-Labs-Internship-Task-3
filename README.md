@@ -38,7 +38,7 @@ CREATE INDEX JobTitle_index ON cleaned_people_data(job_title);
 
 ---
 
-### 📊 Created Views:
+###  Created Views:
 
 **1. Average Birth Year**
 ```sql
