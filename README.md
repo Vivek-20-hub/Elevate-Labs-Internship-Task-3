@@ -23,14 +23,17 @@ Created Views:
 view Average Birth Year,Gender,Jobtitles
 CREATE VIEW AvgBirthYear AS
 SELECT AVG(CAST(strftime('%Y', date_of_birth) AS INTEGER)) AS avg_birth_year FROM cleaned_people_data;
+
 ![p1](https://github.com/user-attachments/assets/58d2c4bd-d903-4f90-8f06-2526db1c02c7)
 
 CREATE VIEW CountByGender AS
 SELECT sex, COUNT(*) AS total FROM cleaned_people_data GROUP BY sex;
+
 ![p2](https://github.com/user-attachments/assets/daa64aa2-2474-4696-a872-a70ecfa67467)
 
 CREATE VIEW JobTitleStats AS
 SELECT job_title, COUNT(*) AS count FROM cleaned_people_data GROUP BY job_title ORDER BY count DESC;
+
 ![p3](https://github.com/user-attachments/assets/4ea846c3-5b04-494f-a117-d7b9d7993809)
 
 Output views
@@ -42,6 +45,7 @@ People born after 2000:
 
 SELECT user_id, first_name, last_name, date_of_birth FROM cleaned_people_data
 WHERE date_of_birth > '2000-01-01' ORDER BY date_of_birth DESC;
+
 ![p4](https://github.com/user-attachments/assets/1113de0d-e1eb-49be-a55e-7112910b0a3a)
 
 Subquery: People older than average 
@@ -51,6 +55,7 @@ FROM cleaned_people_data
 WHERE CAST(strftime('%Y', date_of_birth) AS INTEGER) < (
     SELECT AVG(CAST(strftime('%Y', date_of_birth) AS INTEGER)) FROM cleaned_people_data
 );
+
 ![p5](https://github.com/user-attachments/assets/4eebaa28-15ed-40f1-b04e-fa1e4664a08c)
 
 Inner Join: Matching people with same job title
