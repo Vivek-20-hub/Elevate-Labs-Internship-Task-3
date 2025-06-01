@@ -11,6 +11,9 @@ Import the cleaned_sales_data.csv into the database as a table.
 Perform SQL queries on the table.
 Observe and note the output.
 Save the queries in a SQL file
+
+SQl Queries and Output
+
  CREATE Indexes:
  Index of user_id:
 CREATE INDEX UserID_index ON cleaned_people_data(user_id);
