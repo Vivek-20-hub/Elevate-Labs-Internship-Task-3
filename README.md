@@ -1,72 +1,133 @@
+
 # Elevate-Labs-Internship-Task-3
 
-Dataset: Cleaned_people_data.csv
-Data cleaning and preprocessing: Elevate-Labs-Internship-Task-1
-Cleaned Dataset: cleaned_sales_data.csv
+**Dataset:** `cleaned_people_data.csv`  
+**Data Cleaning and Preprocessing:** `Elevate-Labs-Internship-Task-1`  
+**Cleaned Dataset:** `cleaned_people_data.csv`
 
-Here is a brief overview of the SQL for data analysis process:
+---
 
-Using the DB Browser for SQLite, create a new database.
-Import the cleaned_sales_data.csv into the database as a table.
-Perform SQL queries on the table.
-Observe and note the output.
-Save the queries in a SQL file
+## 🔧 Overview of SQL Data Analysis Process
 
-SQl Queries and Output
+1. Using the DB Browser for SQLite, create a new database.
+2. Import the `cleaned_people_data.csv` into the database as a table.
+3. Perform SQL queries on the table.
+4. Observe and note the output.
+5. Save the queries in a SQL file.
 
- CREATE Indexes:
- Index of user_id:
+---
+
+## 🧾 SQL Queries and Output
+
+### 📌 CREATE Indexes:
+
+**Index of user_id:**
+```sql
 CREATE INDEX UserID_index ON cleaned_people_data(user_id);
-Index of Sex:
+```
+
+**Index of sex:**
+```sql
 CREATE INDEX Sex_index ON cleaned_people_data(sex);
-Index of Job_title:
+```
+
+**Index of job_title:**
+```sql
 CREATE INDEX JobTitle_index ON cleaned_people_data(job_title);
+```
 
-Created Views:
+---
 
-view Average Birth Year,Gender,Jobtitles
+### 📊 Created Views:
 
+**1. Average Birth Year**
+```sql
 CREATE VIEW AvgBirthYear AS
 SELECT AVG(CAST(strftime('%Y', date_of_birth) AS INTEGER)) AS avg_birth_year FROM cleaned_people_data;
+```
 
-![p1](https://github.com/user-attachments/assets/58d2c4bd-d903-4f90-8f06-2526db1c02c7)
-
+**2. Count By Gender**
+```sql
 CREATE VIEW CountByGender AS
 SELECT sex, COUNT(*) AS total FROM cleaned_people_data GROUP BY sex;
+```
 
-![p2](https://github.com/user-attachments/assets/daa64aa2-2474-4696-a872-a70ecfa67467)
-
+**3. Job Title Stats**
+```sql
 CREATE VIEW JobTitleStats AS
 SELECT job_title, COUNT(*) AS count FROM cleaned_people_data GROUP BY job_title ORDER BY count DESC;
+```
 
-![p3](https://github.com/user-attachments/assets/4ea846c3-5b04-494f-a117-d7b9d7993809)
+---
 
-Output views
+### 🔍 Output Views
 
+```sql
 SELECT * FROM AvgBirthYear;
 SELECT * FROM CountByGender;
 SELECT * FROM JobTitleStats;
+```
 
-People born after 2000:
+---
 
-SELECT user_id, first_name, last_name, date_of_birth FROM cleaned_people_data
-WHERE date_of_birth > '2000-01-01' ORDER BY date_of_birth DESC;
+### 👶 People Born After 2000
 
-![p4](https://github.com/user-attachments/assets/1113de0d-e1eb-49be-a55e-7112910b0a3a)
+```sql
+SELECT user_id, first_name, last_name, date_of_birth
+FROM cleaned_people_data
+WHERE date_of_birth > '2000-01-01'
+ORDER BY date_of_birth DESC;
+```
 
-Subquery: People older than average 
+---
 
+### 🧓 People Older Than Average (Subquery)
+
+```sql
 SELECT user_id, first_name, last_name, date_of_birth
 FROM cleaned_people_data
 WHERE CAST(strftime('%Y', date_of_birth) AS INTEGER) < (
     SELECT AVG(CAST(strftime('%Y', date_of_birth) AS INTEGER)) FROM cleaned_people_data
 );
+```
 
-![p5](https://github.com/user-attachments/assets/4eebaa28-15ed-40f1-b04e-fa1e4664a08c)
+---
 
-Inner Join: Matching people with same job title
+### 🤝 Inner Join: People with Same Job Title
 
+```sql
 SELECT a.user_id AS user1_id, b.user_id AS user2_id, a.job_title
+FROM cleaned_people_data a
+JOIN cleaned_people_data b ON a.job_title = b.job_title
+WHERE a.user_id <> b.user_id;
+```
+
+---
+
+### 🧬 Left Join: Same Gender Users
+
+```sql
+SELECT a.user_id, a.first_name, b.user_id AS matched_user, a.sex
+FROM cleaned_people_data a
+LEFT JOIN cleaned_people_data b ON a.sex = b.sex
+WHERE a.user_id <> b.user_id;
+```
+
+---
+
+### 🏷️ Top 5 Unique Job Titles
+
+```sql
+SELECT DISTINCT job_title
+FROM cleaned_people_data
+ORDER BY job_title ASC
+LIMIT 5;
+```
+
+---
+
+> 📁 Outputs of all queries are shown in the Word document with SQL-style tables.
+
 FROM cleaned_people_data a
 INNER JOIN cleaned_people_data b ON a.job_title = b.job_title AND a.user_id <> b.user_id
 ORDER BY a.job_title LIMIT 10;
